@@ -1,27 +1,21 @@
 <script lang="ts">
-	import type { components, paths } from '$lib/types/api/v1/schema';
-	import createClient from 'openapi-fetch';
-
-	const client = createClient<paths>({
-		baseUrl: import.meta.env.VITE_CORE_API_BASE_URL,
-		credentials: 'include'
-	});
+	import rq from '$lib/rq/rq.svelte';
+	import type { components } from '$lib/types/api/v1/schema';
 
 	let posts: components['schemas']['PostDto'][] = $state([]);
 
-	$effect(() => {
-		(async () => {
-			const { data, error } = await client.GET('/api/v1/posts', {});
-			if (data) {
-				posts = data.data.items;
-			}
-		})();
+	rq.effect(async () => {
+		const { data } = await rq.apiEndPoints().GET('/api/v1/posts');
+
+		if (data) {
+			posts = data.data.items;
+		}
 	});
 </script>
 
 <div>
 	<h1>Posts</h1>
-    
+
 	<ul>
 		{#each posts as post}
 			<li>
