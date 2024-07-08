@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:medium_test;MODE=MYSQL
+  jpa:
+    hibernate:
+      ddl-auto: create
+custom:
+  site:
+    baseUrl: "http://localhost:8080"
+  tempDirPath: ${HOME}/Desktop/os/medium_test/temp
+  genFile:
+    dirPath: ${HOME}/Desktop/os/medium_test

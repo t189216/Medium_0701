@@ -1,0 +1,31 @@
+<html layout:decorate="~{global/userLayout}">
+
+<head>
+    <title th:text="|글 ${post.id}번|"></title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <h1>글 내용</h1>
+
+    <div>
+        <h3>제목</h3>
+        <div th:text="${post.title}"></div>
+    </div>
+
+    <div>
+        <h3>내용</h3>
+        <div style="white-space: pre-wrap;" th:text="${post.body}"></div>
+    </div>
+
+    <hr>
+
+    <div>
+        <button onclick="history.back();">뒤로가기</button>
+    </div>
+</div>
+
+</body>
+
+</html>
