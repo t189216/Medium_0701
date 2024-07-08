@@ -1,4 +1,4 @@
-package com.ll.md0701.global.init;
+package com.ll.md0701.global.initData;
 
 import com.ll.md0701.domain.member.member.service.MemberService;
 import lombok.RequiredArgsConstructor;

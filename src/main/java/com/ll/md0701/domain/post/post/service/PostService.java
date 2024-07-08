@@ -6,7 +6,6 @@ import com.ll.md0701.domain.post.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,5 +40,13 @@ public class PostService {
 
     public Page<Post> search(String kw, Pageable pageable) {
         return postRepository.findByTitleContainingIgnoreCaseOrBodyContainingIgnoreCase(kw, kw, pageable);
+    }
+
+    public List<Post> findByIsPublished(boolean isPublished) {
+        return postRepository.findByIsPublishedOrderByIdDesc(isPublished);
+    }
+
+    public List<Post> findByAuthor(Member author) {
+        return postRepository.findByAuthorOrderByIdDesc(author);
     }
 }

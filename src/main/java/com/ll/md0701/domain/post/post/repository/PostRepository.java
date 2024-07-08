@@ -12,4 +12,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findTop30ByIsPublishedOrderByIdDesc(boolean isPublished);
 
     Page<Post> findByTitleContainingIgnoreCaseOrBodyContainingIgnoreCase(String kw, String kw_, Pageable pageable);
+
+    List<Post> findByIsPublishedOrderByIdDesc(boolean isPublished);
+
+    List<Post> findByAuthorOrderByIdDesc(Member author);
 }

@@ -1,3 +1,5 @@
+server:
+  port: 8090
 spring:
   profiles:
     active: dev
@@ -6,6 +8,9 @@ spring:
     multipart:
       max-file-size: 50MB
       max-request-size: 50MB
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
   threads:
     virtual:
       enabled: true
@@ -25,15 +30,30 @@ spring:
         use_sql_comments: true
 logging:
   level:
-    com.ll.md0701: DEBUG
+    com.ll.medium: DEBUG
     org.hibernate.SQL: DEBUG
     org.hibernate.orm.jdbc.bind: TRACE
     org.hibernate.orm.jdbc.extract: TRACE
     org.springframework.transaction.interceptor: TRACE
 custom:
+  dev:
+    cookieDomain: localhost
+    frontUrl: "http://${custom.dev.cookieDomain}:5173"
+    backUrl: "http://${custom.dev.cookieDomain}:${server.port}"
+  production:
+    cookieDomain: medium.oa.gg
+    frontUrl: "https://${custom.production.cookieDomain}"
+    backUrl: "https://api.${custom.production.cookieDomain}"
   site:
+    cookieDomain: "${custom.dev.cookieDomain}"
+    frontUrl: "${custom.dev.frontUrl}"
+    backUrl: "${custom.dev.backUrl}"
     name: medium
-    baseUrl: "http://localhost:${server.port}"
-  tempDirPath: ${HOME}/Desktop/os/medium/temp
+  jwt:
+    secretKey: ON_SECRET
+  accessToken:
+    expirationSec: '#{60*60}'
+  temp:
+    dirPath: ${HOME}/Desktop/os/medium_dev/temp
   genFile:
-    dirPath: ${HOME}/Desktop/os/medium
+    dirPath: ${HOME}/Desktop/os/medium_dev

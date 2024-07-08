@@ -1,15 +1,13 @@
 package com.ll.md0701.domain.post.post.entity;
 
 import com.ll.md0701.domain.member.member.entity.Member;
-import jakarta.persistence.*;
+import com.ll.md0701.global.jpa.Base.BaseTime;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.LocalDateTime;
-
-import static jakarta.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity
@@ -19,18 +17,8 @@ import static lombok.AccessLevel.PROTECTED;
 @Getter
 @Setter
 @EntityListeners(AuditingEntityListener.class)
-public class Post {
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    private Long id;
-
-    @CreatedDate
-    private LocalDateTime createDate;
-
-    @LastModifiedDate
-    private LocalDateTime modifyDate;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+public class Post extends BaseTime {
+    @ManyToOne
     private Member author;
 
     private String title;

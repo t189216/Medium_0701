@@ -7,6 +7,7 @@ spring:
 custom:
   site:
     baseUrl: "http://localhost:8080"
-  tempDirPath: ${HOME}/Desktop/os/medium_test/temp
+  temp:
+    dirPath: ${HOME}/Desktop/os/medium_test/temp
   genFile:
     dirPath: ${HOME}/Desktop/os/medium_test

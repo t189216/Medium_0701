@@ -9,39 +9,47 @@ import java.io.IOException;
 
 @Configuration
 public class AppConfig {
+    @Getter
+    public static String jwtSecretKey;
+
+    @Value("${custom.jwt.secretKey}")
+    public void setJwtSecretKey(String jwtSecretKey) {
+        this.jwtSecretKey = jwtSecretKey;
+    }
+
+    @Getter
+    private static long accessTokenExpirationSec;
+
+    @Value("${custom.accessToken.expirationSec}")
+    public void setJwtSecretKey(long accessTokenExpirationSec) {
+        this.accessTokenExpirationSec = accessTokenExpirationSec;
+    }
+
+    @Getter
+    private static String siteFrontUrl;
+
+    @Value("${custom.site.frontUrl}")
+    public void setSiteFrontUrl(String siteFrontUrl) {
+        this.siteFrontUrl = siteFrontUrl;
+    }
+
+    @Getter
+    private static String siteBackUrl;
+
+    @Value("${custom.site.backUrl}")
+    public void setSiteBackUrl(String siteBackUrl) {
+        this.siteBackUrl = siteBackUrl;
+    }
+
+    @Getter
+    private static String siteCookieDomain;
+
+    @Value("${custom.site.cookieDomain}")
+    public void setSiteCookieDomain(String siteCookieDomain) {
+        this.siteCookieDomain = siteCookieDomain;
+    }
+
     private static String resourcesStaticDirPath;
-
-    @Getter
-    public static String tempDirPath;
-
-    @Getter
-    public static String genFileDirPath;
-
-    @Getter
-    public static String siteName;
-
-    @Getter
-    public static String siteBaseUrl;
-
-    @Value("${custom.tempDirPath}")
-    public void setTempDirPath(String tempDirPath) {
-        AppConfig.tempDirPath = tempDirPath;
-    }
-
-    @Value("${custom.genFile.dirPath}")
-    public void setGenFileDirPath(String genFileDirPath) {
-        AppConfig.genFileDirPath = genFileDirPath;
-    }
-
-    @Value("${custom.site.name}")
-    public void setSiteName(String siteName) {
-        AppConfig.siteName = siteName;
-    }
-
-    @Value("${custom.site.baseUrl}")
-    public void setSiteBaseUrl(String siteBaseUrl) {
-        AppConfig.siteBaseUrl = siteBaseUrl;
-    }
 
     public static String getResourcesStaticDirPath() {
         if (resourcesStaticDirPath == null) {
@@ -54,5 +62,29 @@ public class AppConfig {
         }
 
         return resourcesStaticDirPath;
+    }
+
+    @Getter
+    public static String tempDirPath;
+
+    @Value("${custom.temp.dirPath}")
+    public void setTempDirPath(String tempDirPath) {
+        AppConfig.tempDirPath = tempDirPath;
+    }
+
+    @Getter
+    public static String genFileDirPath;
+
+    @Value("${custom.genFile.dirPath}")
+    public void setGenFileDirPath(String genFileDirPath) {
+        AppConfig.genFileDirPath = genFileDirPath;
+    }
+
+    @Getter
+    public static String siteName;
+
+    @Value("${custom.site.name}")
+    public void setSiteName(String name) {
+        AppConfig.siteName = name;
     }
 }

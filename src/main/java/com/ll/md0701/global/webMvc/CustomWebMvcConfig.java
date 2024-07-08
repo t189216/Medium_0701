@@ -12,7 +12,10 @@ public class CustomWebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
-                .allowedOrigins("https://cdpn.io", "http://localhost:5173")
+                .allowedOrigins(
+                        "https://cdpn.io",
+                        AppConfig.getSiteFrontUrl()
+                )
                 .allowedMethods("*")
                 .allowedHeaders("*")
                 .allowCredentials(true);
