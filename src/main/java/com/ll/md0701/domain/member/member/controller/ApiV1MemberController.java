@@ -11,10 +11,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,21 +27,14 @@ public class ApiV1MemberController {
     private final MemberService memberService;
     private final Rq rq;
 
-    @Getter
-    @Setter
-    public static class LoginRequestBody {
-        @NotBlank
-        private String username;
-
-        @NotBlank
-        private String password;
+    public record LoginRequestBody(@NotBlank String username,
+                                   @NotBlank String password) {
     }
 
-    @AllArgsConstructor
-    @Getter
-    public static class LoginResponseBody {
-        @NonNull
-        private MemberDto item;
+    public record LoginResponseBody(@NonNull MemberDto item) {
+        public LoginResponseBody(Member item) {
+            this(new MemberDto(item));
+        }
     }
 
     @PostMapping("/login")
@@ -52,29 +42,22 @@ public class ApiV1MemberController {
     public RsData<LoginResponseBody> login(
             @Valid @RequestBody LoginRequestBody body
     ) {
-        RsData<MemberService.AuthAndMakeTokensResponseBody> authAndMakeTokensRs = memberService.authAndMakeTokens(body.getUsername(), body.getPassword());
+        RsData<MemberService.AuthAndMakeTokensResponseBody> authAndMakeTokensRs = memberService.authAndMakeTokens(
+                body.username,
+                body.password
+        );
 
         rq.setCrossDomainCookie("refreshToken", authAndMakeTokensRs.getData().getRefreshToken());
         rq.setCrossDomainCookie("accessToken", authAndMakeTokensRs.getData().getAccessToken());
 
-        return RsData.of(
-                authAndMakeTokensRs.getResultCode(),
-                authAndMakeTokensRs.getMsg(),
-                new LoginResponseBody(
-                        new MemberDto(
-                                authAndMakeTokensRs.getData().getMember()
-                        )
-                )
+        return authAndMakeTokensRs.of(
+                new LoginResponseBody(authAndMakeTokensRs.getData().getMember())
         );
     }
 
-    @Getter
-    public static class MeResponseBody {
-        @NonNull
-        private MemberDto item;
-
-        public MeResponseBody(Member member) {
-            this.item = new MemberDto(member);
+    public record MeResponseBody(@NonNull MemberDto item) {
+        public MeResponseBody(Member item) {
+            this(new MemberDto(item));
         }
     }
 

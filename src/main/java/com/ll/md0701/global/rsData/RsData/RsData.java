@@ -24,6 +24,10 @@ public class RsData<T> {
     @NonNull
     T data;
 
+    public <T> RsData<T> of(T data) {
+        return of(this.resultCode, this.msg, data);
+    }
+
     public static <T> RsData<T> of(String resultCode, String msg) {
         return of(resultCode, msg, (T) new Empty());
     }
