@@ -49,4 +49,8 @@ public class PostService {
     public <T> List<T> findByAuthor(Member author, Class<T> type) {
         return postRepository.findByAuthorOrderByIdDesc(author, type);
     }
+
+    public <T> Optional<T> findById(long id, Class<T> type) {
+        return postRepository.findById(id, type);
+    }
 }

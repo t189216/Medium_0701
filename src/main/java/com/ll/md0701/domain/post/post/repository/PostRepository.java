@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findTop30ByPublishedOrderByIdDesc(boolean isPublished);
@@ -17,4 +18,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     <T> List<T> findByAuthorOrderByIdDesc(Member author, Class<T> type);
 
+    <T> Optional<T> findById(long id, Class<T> type);
 }
