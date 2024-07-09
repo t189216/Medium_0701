@@ -35,4 +35,5 @@
 	<input type="text" name="username" placeholder="Username" />
 	<input type="password" name="password" placeholder="Password" />
 	<button type="submit">Login</button>
+	<a href={rq.getKakaoLoginUrl()}>카카오 로그인</a>
 </form>
