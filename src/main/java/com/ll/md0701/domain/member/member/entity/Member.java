@@ -1,9 +1,6 @@
 package com.ll.md0701.domain.member.member.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -41,13 +38,25 @@ public class Member {
 
     private String password;
 
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<>();
+    @Column(unique = true)
+    private String refreshToken;
 
-        authorities.add(new SimpleGrantedAuthority("ROLE_MEMBER"));
+    @Transient
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getAuthoritiesAsStringList()
+                .stream()
+                .map(SimpleGrantedAuthority::new)
+                .toList();
+    }
+
+    @Transient
+    public List<String> getAuthoritiesAsStringList() {
+        List<String> authorities = new ArrayList<>();
+
+        authorities.add("ROLE_MEMBER");
 
         if (List.of("system", "admin").contains(username)) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            authorities.add("ROLE_ADMIN");
         }
 
         return authorities;

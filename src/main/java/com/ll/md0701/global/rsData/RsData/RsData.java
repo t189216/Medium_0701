@@ -3,7 +3,7 @@ package com.ll.md0701.global.rsData.RsData;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import org.springframework.lang.NonNull;
 
 import static lombok.AccessLevel.PRIVATE;
 

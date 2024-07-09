@@ -3,7 +3,7 @@ package com.ll.md0701.domain.post.post.dto;
 import com.ll.md0701.domain.post.post.entity.Post;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import org.springframework.lang.NonNull;
 
 import java.time.LocalDateTime;
 
