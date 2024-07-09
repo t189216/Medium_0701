@@ -8,7 +8,7 @@ on:
       - Dockerfile
       - .github/workflows/deploy.yml
     branches:
-      - second
+      - main
 jobs:
   deploy:
     name: Deploy app
