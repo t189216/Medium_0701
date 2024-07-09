@@ -2,6 +2,12 @@
 	import rq from '$lib/rq/rq.svelte';
 	import '$lib/app.css';
 	const { children } = $props();
+	import { untrack } from 'svelte';
+	rq.effect(async () => {
+		untrack(() => {
+			rq.initAuth();
+		});
+	});
 </script>
 
 <header class="flex">

@@ -49,6 +49,14 @@ public class MemberService {
         return memberRepository.count();
     }
 
+    public RsData<Member> whenSocialLogin(String providerTypeCode, String username, String nickname, String profileImgUrl) {
+        Optional<Member> opMember = findByUsername(username);
+
+        if (opMember.isPresent()) return RsData.of("200", "이미 존재합니다.", opMember.get());
+
+        return join(username, "");
+    }
+
     @AllArgsConstructor
     @Getter
     public static class AuthAndMakeTokensResponseBody {

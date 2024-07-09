@@ -4,6 +4,7 @@ import com.ll.md0701.domain.member.member.entity.Member;
 import com.ll.md0701.domain.member.member.service.MemberService;
 import com.ll.md0701.global.rq.Rq.Rq;
 import com.ll.md0701.global.rsData.RsData.RsData;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -12,6 +13,7 @@ import lombok.Setter;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -49,5 +51,15 @@ public class MemberController {
     @GetMapping("/login")
     public String showLogin() {
         return "domain/member/member/login";
+    }
+
+    @GetMapping("/socialLogin/{providerTypeCode}")
+    @Operation(summary = "소셜 로그인")
+    public String socialLogin(String redirectUrl, @PathVariable String providerTypeCode) {
+        if (rq.isFrontUrl(redirectUrl)) {
+            rq.setCookie("redirectUrlAfterSocialLogin", redirectUrl, 60 * 10);
+        }
+
+        return "redirect:/oauth2/authorization/" + providerTypeCode;
     }
 }
