@@ -24,14 +24,14 @@ public class PostService {
                 .author(author)
                 .title(title)
                 .body(body)
-                .isPublished(isPublished)
+                .published(isPublished)
                 .build();
 
         postRepository.save(post);
     }
 
-    public Object findTop30ByIsPublishedOrderByIdDesc(boolean isPublished) {
-        return postRepository.findTop30ByIsPublishedOrderByIdDesc(isPublished);
+    public Object findTop30ByPublishedOrderByIdDesc(boolean isPublished) {
+        return postRepository.findTop30ByPublishedOrderByIdDesc(isPublished);
     }
 
     public Optional<Post> findById(long id) {
@@ -42,8 +42,8 @@ public class PostService {
         return postRepository.findByTitleContainingIgnoreCaseOrBodyContainingIgnoreCase(kw, kw, pageable);
     }
 
-    public List<Post> findByIsPublished(boolean isPublished) {
-        return postRepository.findByIsPublishedOrderByIdDesc(isPublished);
+    public List<Post> findByPublished(boolean isPublished) {
+        return postRepository.findByPublishedOrderByIdDesc(isPublished);
     }
 
     public List<Post> findByAuthor(Member author) {

@@ -1,45 +1,23 @@
-<!doctype html>
-<html lang="ko">
+<!DOCTYPE html>
+<html layout:decorate="~{global/layout}">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
-    <link href="https://jhs512.github.io/toastr/toastr.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="/resource/global/global.css">
-    <script src="/resource/global/global.js"></script>
-
-    <script>
-        const urlParams = getUrlParams(location.href);
-    </script>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE" th:text="${@appConfig.siteName}"></title>
 </head>
+
 <body>
 
-<th:block layout:fragment="header"></th:block>
+<header layout:fragment="header" class="flex gap-2">
+    <h1 th:text="|${@appConfig.siteName}|"></h1>
 
-<th:block layout:fragment="content"></th:block>
-
-<script>
-    // history.back 에 의해서 돌아온 경우에 자바스크립트가 실행이 안될 수 도 잇다.
-    // $(window).bind("pageshow", function (event) {}); 를 사용하면 해결이 된다.
-    $(window).bind("pageshow", function (event) {
-        if (sessionStorage.getItem("historyBackFailMsg")) {
-            toastWarning(sessionStorage.getItem("historyBackFailMsg"));
-            sessionStorage.removeItem("historyBackFailMsg");
-        }
-    });
-
-    if (urlParams.msg) {
-        toastNotice(urlParams.msg);
-    }
-
-    if (urlParams.failMsg) {
-        toastWarning(urlParams.failMsg);
-    }
-</script>
+    <a href="/">홈</a>
+    <a href="/post/list">글 목록</a>
+    <a th:if="${@rq.admin}" href="/adm">관리자 홈</a>
+    <a th:if="${@rq.logout}" href="/member/login">로그인</a>
+    <a th:if="${@rq.logout}" href="/member/join">회원가입</a>
+    <a th:if="${@rq.login}" href="/member/logout">로그아웃</a>
+</header>
 
 </body>
+
 </html>

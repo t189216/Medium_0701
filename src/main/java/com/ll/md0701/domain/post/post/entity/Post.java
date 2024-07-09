@@ -25,5 +25,5 @@ public class Post extends BaseTime {
 
     private String body;
 
-    private boolean isPublished;
+    private boolean published;
 }

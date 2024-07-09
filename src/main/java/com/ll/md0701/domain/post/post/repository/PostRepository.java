@@ -9,11 +9,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
-    List<Post> findTop30ByIsPublishedOrderByIdDesc(boolean isPublished);
+    List<Post> findTop30ByPublishedOrderByIdDesc(boolean isPublished);
 
     Page<Post> findByTitleContainingIgnoreCaseOrBodyContainingIgnoreCase(String kw, String kw_, Pageable pageable);
 
-    List<Post> findByIsPublishedOrderByIdDesc(boolean isPublished);
+    List<Post> findByPublishedOrderByIdDesc(boolean isPublished);
 
     List<Post> findByAuthorOrderByIdDesc(Member author);
 }

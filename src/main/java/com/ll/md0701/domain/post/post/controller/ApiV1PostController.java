@@ -48,7 +48,7 @@ public class ApiV1PostController {
     public RsData<GetItemsResponseBody> getItems() {
         Member member = rq.getMember();
 
-        List<Post> posts = postService.findByIsPublished(true);
+        List<Post> posts = postService.findByPublished(true);
 
         return RsData.of(
                 "200",
