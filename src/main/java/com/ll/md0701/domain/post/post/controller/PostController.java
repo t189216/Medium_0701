@@ -3,6 +3,8 @@ package com.ll.md0701.domain.post.post.controller;
 import com.ll.md0701.domain.post.post.entity.Post;
 import com.ll.md0701.domain.post.post.service.PostService;
 import com.ll.md0701.global.rq.Rq.Rq;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,11 +22,13 @@ import java.util.List;
 @Controller
 @RequestMapping("/post")
 @RequiredArgsConstructor
+@Tag(name = "PostController", description = "글 CRUD 컨트롤러")
 public class PostController {
     private final PostService postService;
     private final Rq rq;
 
     @GetMapping("/{id}")
+    @Operation(summary = "글 상세")
     public String showDetail(@PathVariable long id) {
         rq.setAttribute("post", postService.findById(id).get());
 
@@ -32,6 +36,7 @@ public class PostController {
     }
 
     @GetMapping("/list")
+    @Operation(summary = "글 목록")
     public String showList(
             @RequestParam(defaultValue = "") String kw,
             @RequestParam(defaultValue = "1") int page

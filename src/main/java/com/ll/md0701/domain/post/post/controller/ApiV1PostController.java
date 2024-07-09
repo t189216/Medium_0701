@@ -44,7 +44,6 @@ public class ApiV1PostController {
     }
 
     @GetMapping(value = "", consumes = ALL_VALUE)
-    @SecurityRequirement(name = "none")
     @Operation(summary = "글 리스트")
     public RsData<GetItemsResponseBody> getItems() {
         Member member = rq.getMember();
