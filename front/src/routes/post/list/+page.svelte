@@ -2,7 +2,7 @@
 	import rq from '$lib/rq/rq.svelte';
 	import type { components } from '$lib/types/api/v1/schema';
 
-	let posts: components['schemas']['PostDto'][] = $state([]);
+	let posts: components['schemas']['PostListItemDto'][] = $state([]);
 
 	rq.effect(async () => {
 		const { data } = await rq.apiEndPoints().GET('/api/v1/posts');

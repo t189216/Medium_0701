@@ -22,7 +22,7 @@
 			}
 		});
 		if (data) {
-			rq.msgInfo(data.msg);
+			rq.msgInfo('환영합니다.');
 			rq.setLogined(data.data.item);
 			rq.goto('/');
 		} else if (error) {

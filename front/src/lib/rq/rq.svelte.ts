@@ -67,8 +67,12 @@ class Rq {
 		toastr.error(message);
 	}
 
-	public goto(path: string) {
-		goto(path);
+	public goto(url: string) {
+		goto(url);
+	}
+
+	public replace(url: string) {
+		goto(url, { replaceState: true });
 	}
 
 	public setLogined(member: components['schemas']['MemberDto']) {
@@ -156,7 +160,7 @@ class Rq {
 			import.meta.env.VITE_CORE_API_BASE_URL
 		}/member/socialLogin/kakao?redirectUrl=${encodeURIComponent(
 			import.meta.env.VITE_CORE_FRONT_BASE_URL
-		)}`;
+		)}/member/socialLoginCallback?provierTypeCode=kakao`;
 	}
 }
 
