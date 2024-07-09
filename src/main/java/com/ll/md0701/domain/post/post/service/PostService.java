@@ -42,11 +42,11 @@ public class PostService {
         return postRepository.findByTitleContainingIgnoreCaseOrBodyContainingIgnoreCase(kw, kw, pageable);
     }
 
-    public List<Post> findByPublished(boolean isPublished) {
-        return postRepository.findByPublishedOrderByIdDesc(isPublished);
+    public <T> List<T> findByPublished(boolean isPublished, Class<T> type) {
+        return postRepository.findByPublishedOrderByIdDesc(isPublished, type);
     }
 
-    public List<Post> findByAuthor(Member author) {
-        return postRepository.findByAuthorOrderByIdDesc(author);
+    public <T> List<T> findByAuthor(Member author, Class<T> type) {
+        return postRepository.findByAuthorOrderByIdDesc(author, type);
     }
 }

@@ -68,9 +68,9 @@ export interface paths {
         fail: boolean;
       };
       GetItemsResponseBody: {
-        items: components["schemas"]["PostDto"][];
+        items: components["schemas"]["PostListItemDto"][];
       };
-      PostDto: {
+      PostListItemDto: {
         /** Format: int64 */
         id: number;
         /** Format: date-time */
@@ -93,7 +93,7 @@ export interface paths {
         fail: boolean;
       };
       GetMineResponseBody: {
-        items: components["schemas"]["PostDto"][];
+        items: components["schemas"]["PostListItemDto"][];
       };
       RsDataGetMineResponseBody: {
         resultCode: string;
