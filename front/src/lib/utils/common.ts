@@ -26,3 +26,18 @@ export function getUrlParams(url: string): Record<string, string> {
 
 	return params;
 }
+
+export function stripIndent(str: string): string {
+	// 첫 줄의 공백을 찾아서 모든 줄에서 해당 공백을 제거
+	const match = str.match(/^[ \t]*(?=\S)/gm);
+	if (!match) {
+		return str;
+	}
+
+	// 가장 작은 공백 길이를 찾기
+	const indent = Math.min(...match.map((el) => el.length));
+	const re = new RegExp(`^[ \\t]{${indent}}`, 'gm');
+
+	// 모든 줄에서 해당 공백 제거
+	return str.replace(re, '');
+}
